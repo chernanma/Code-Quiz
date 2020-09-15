@@ -25,7 +25,11 @@ var quiz = [{"question":"What is the highest montain in the world" ,
             "answer" : "everest"},
             {"question":"What is the fatest car in the world" , 
             "options" : [ "ferrari","lambo","corvette" ],
-            "answer" : "lambo"}];
+            "answer" : "lambo"},
+            {"question":"What is the best Cycling team" , 
+            "options" : [ "Movistar","Ineos","Astana" ],
+            "answer" : "Ineos"}
+          ];
 
 var titleQuestion;
 var optionlist;
@@ -85,34 +89,34 @@ function startquiz(){
     
 
     quizPageGenerator(index); 
-    var choiceval;
-    document.querySelectorAll('.list-group-item').forEach(item => {
-      item.addEventListener('click', event => {
-        choiceval = item.textContent;
-        console.log(choiceval);
-        for (var i=0; i < quiz.length; i++){
-          var answerArray = quiz[i].answer;                    
-          if (answerArray === choiceval.substring(3)){
-            i= quiz.length;    
-            index ++;        
-            score = score + 5;            
-            cardfooter.textContent="Correct!";
-            console.log(index);
-            quizPageGenerator(index);
-          }
-          else { 
-            i= quiz.length;
-            index ++;   
-            if (score !== 0){
-              score = score - 5;
-            }         
-            cardfooter.textContent="Wrong!";
-            console.log(index);
-            quizPageGenerator(index);
-          }
-        }
-      } )
-    });
+    // var choiceval;
+    // document.querySelectorAll('.list-group-item').forEach(item => {
+    //   item.addEventListener('click', event => {
+    //     choiceval = item.textContent;
+    //     console.log(choiceval);
+    //     for (var i=0; i < quiz.length; i++){
+    //       var answerArray = quiz[i].answer;                    
+    //       if (answerArray === choiceval.substring(3)){
+    //         i= quiz.length;    
+    //         index ++;        
+    //         score = score + 5;            
+    //         cardfooter.textContent="Correct!";
+    //         console.log(index);
+    //         quizPageGenerator(index);
+    //       }
+    //       else { 
+    //         i= quiz.length;
+    //         index ++;   
+    //         if (score !== 0){
+    //           score = score - 5;
+    //         }         
+    //         cardfooter.textContent="Wrong!";
+    //         console.log(index);
+    //         quizPageGenerator(index);
+    //       }
+    //     }
+    //   } )
+    // });
        
   }
 
@@ -120,9 +124,9 @@ function quizPageGenerator (index){
 
   
     $("#choice").empty(); 
-    
+    console.log(index);
     card.setAttribute("class","card text-center");
-    card.setAttribute("id","#card");
+    card.setAttribute("id","card");
     cardheader.setAttribute("class","card-header");
     cardheader.textContent= quiz[index].question;
     cardbody.setAttribute("class","card-body");    
@@ -149,6 +153,38 @@ function quizPageGenerator (index){
     startbutton.style.display = "none";
     ulEl.style.display="block";
     card.style.display = "block";
+
+    var choiceval;
+    document.querySelectorAll('.list-group-item').forEach(item => {
+      item.addEventListener('click', event => {
+        choiceval = item.textContent;
+        console.log(choiceval);
+        for (var i=0; i < quiz.length; i++){
+          var answerArray = quiz[index].answer;      
+          console.log(answerArray);              
+          if (answerArray === choiceval.substring(3)){
+            i= quiz.length;    
+            index ++;        
+            score = score + 5;            
+            cardfooter.textContent="Correct!";
+            console.log(index);
+            quizPageGenerator(index);
+          }
+          else { 
+            i= quiz.length;
+            index ++;   
+            if (score !== 0){
+              score = score - 5;
+            }         
+            cardfooter.textContent="Wrong!";
+            console.log(index);
+            quizPageGenerator(index);
+          }
+
+        }
+        console.log(score);
+      } )
+    });
        
 }
 
