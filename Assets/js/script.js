@@ -11,7 +11,13 @@ var cardheader = document.createElement("div");
 var cardbody = document.createElement("div");
 var cardtitle = document.createElement("h5");
 var cardtext = document.createElement("p");
+var cardfooter = document.createElement("div");
 var startbutton = document.createElement("button");
+var ulEl = document.createElement("ul");
+
+var index = 0;
+var score =0;
+
 
 
 var quiz = [{"question":"What is the highest montain in the world" , 
@@ -21,6 +27,8 @@ var quiz = [{"question":"What is the highest montain in the world" ,
             "options" : [ "ferrari","lambo","corvette" ],
             "answer" : "lambo"}];
 
+var titleQuestion;
+var optionlist;
 
 
 var numQuestions = quiz.length;
@@ -74,22 +82,75 @@ function startquiz(){
           clearInterval(interval);
         }
       },1000);
+    
 
-    // for (i in quiz) {
-    //     var titleQuestion = document.createElement("h2");
-    //     titleQuestion.textContent=quiz[i].question;
-    //     console.log(titleQuestion);
-    //     QuizBoxEl.appendChild(titleQuestion);
-        
-    //     for (j in quiz[i].options) {
-    //       var optionlist = document.createElement("li");
-    //       optionlist.textContent=quiz[i].options[j];
-    //       OptionsEl.appendChild(optionlist);  
-    //       console.log(optionlist);
-    //       console.log(quiz[i].options[j]);
-    //     }
-    // }
-}      
+    quizPageGenerator(index); 
+    var choiceval;
+    document.querySelectorAll('.list-group-item').forEach(item => {
+      item.addEventListener('click', event => {
+        choiceval = item.textContent;
+        console.log(choiceval);
+        for (var i=0; i < quiz.length; i++){
+          var answerArray = quiz[i].answer;                    
+          if (answerArray === choiceval.substring(3)){
+            i= quiz.length;    
+            index ++;        
+            score = score + 5;            
+            cardfooter.textContent="Correct!";
+            console.log(index);
+            quizPageGenerator(index);
+          }
+          else { 
+            i= quiz.length;
+            index ++;   
+            if (score !== 0){
+              score = score - 5;
+            }         
+            cardfooter.textContent="Wrong!";
+            console.log(index);
+            quizPageGenerator(index);
+          }
+        }
+      } )
+    });
+       
+  }
+
+function quizPageGenerator (index){
+
+  
+    $("#choice").empty(); 
+    
+    card.setAttribute("class","card text-center");
+    card.setAttribute("id","#card");
+    cardheader.setAttribute("class","card-header");
+    cardheader.textContent= quiz[index].question;
+    cardbody.setAttribute("class","card-body");    
+    ulEl.setAttribute("class","list-group");
+    ulEl.setAttribute("id","choice");    
+    cardfooter.setAttribute("class","card-footer text-muted");
+    main.append(card);
+    card.appendChild(cardheader);
+    card.appendChild(cardbody);
+    cardbody.appendChild(ulEl);
+    card.appendChild(cardfooter);
+    for (var j = 0; j < quiz[index].options.length;j++){
+      var liEl = document.createElement("li");
+      liEl.setAttribute("class","list-group-item list-group-item-action text-left");
+      liEl.setAttribute("id",j);
+      liEl.setAttribute("data-toggle","list");
+      liEl.textContent= (j + 1) + ". " + quiz[index].options[j];
+      ulEl.appendChild(liEl);
+      console.log(j);
+    }
+    
+    cardtitle.style.display = "none";
+    cardtext.style.display = "none";
+    startbutton.style.display = "none";
+    ulEl.style.display="block";
+    card.style.display = "block";
+       
+}
 
 function getSeconds() { 
     return totalSeconds-Math.round();
@@ -97,3 +158,4 @@ function getSeconds() {
 }
 
 landingpage();
+// quizPageGenerator(index);
