@@ -49,6 +49,7 @@ var numQuestions = quiz.length;
 var cont = 0;
 var totalSeconds = quiz.length * 20;
 var interval;
+var results = [];
 
 function landingpage (){
 
@@ -208,7 +209,7 @@ function userCredentialsInput(){
   $("#choice").empty();
   
   // Setting attributes and values to all elements used to Credential card
-
+  clearInterval(interval);
    
   card.setAttribute("class","card text-center");
   cardheader.setAttribute("class","card-header");
@@ -243,8 +244,25 @@ function userCredentialsInput(){
   inputgroupappend.appendChild(inputbutton);
   card.appendChild(cardfooter); 
 
+// Adding click event to button in the final card 
+
+inputbutton.addEventListener("click", function(){
+  results.push({"Initials":input.value,"Score":score});
+  localStorage.setItem("results",JSON.stringify(results));  
+  window.location.href = "./scores.html";
+  // window.location.replace("./scores.html");
+
+});
 
 }
 
-landingpage();
+results=JSON.parse(localStorage.getItem("results"));
+console.log(results);
+var page = location.pathname.substring(location.pathname.lastIndexOf("/") + 1);
+console.log(page);
+if (page === "index.html"){
+  landingpage();
+}
+
+
 // quizPageGenerator(index);
