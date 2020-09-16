@@ -11,6 +11,16 @@ var cardheader = document.createElement("div");
 var cardbody = document.createElement("div");
 var cardtitle = document.createElement("h5");
 var cardtext = document.createElement("p");
+
+var inputgroup = document.createElement("div");
+var inputgroupprepend = document.createElement("div");
+var inputspan = document.createElement("span");
+var input = document.createElement("input");
+var inputgroupappend = document.createElement("div");
+var inputbutton = document.createElement("button");
+var cardtextinput = document.createElement("h5");
+
+
 var cardfooter = document.createElement("div");
 var startbutton = document.createElement("button");
 var ulEl = document.createElement("ul");
@@ -86,45 +96,24 @@ function startquiz(){
           clearInterval(interval);
         }
       },1000);
-    
-
-    quizPageGenerator(index); 
-    // var choiceval;
-    // document.querySelectorAll('.list-group-item').forEach(item => {
-    //   item.addEventListener('click', event => {
-    //     choiceval = item.textContent;
-    //     console.log(choiceval);
-    //     for (var i=0; i < quiz.length; i++){
-    //       var answerArray = quiz[i].answer;                    
-    //       if (answerArray === choiceval.substring(3)){
-    //         i= quiz.length;    
-    //         index ++;        
-    //         score = score + 5;            
-    //         cardfooter.textContent="Correct!";
-    //         console.log(index);
-    //         quizPageGenerator(index);
-    //       }
-    //       else { 
-    //         i= quiz.length;
-    //         index ++;   
-    //         if (score !== 0){
-    //           score = score - 5;
-    //         }         
-    //         cardfooter.textContent="Wrong!";
-    //         console.log(index);
-    //         quizPageGenerator(index);
-    //       }
-    //     }
-    //   } )
-    // });
-       
+    console.log("Index: "+ index);
+    if (index === 0){
+      quizPageGenerator(index); 
+    }
+        
   }
 
 function quizPageGenerator (index){
-
-  
+  footerTime = setTimeout(function(){
+    cardfooter.textContent="";
+  }, 2000);
+  console.log("quiz lenght :" + quiz.length);
+  if(index <= (quiz.length-1)){
+    // card.appendChild(cardfooter);    
     $("#choice").empty(); 
-    console.log(index);
+    console.log("Index: "+ index); // Console log for debugging  
+
+  // Setting attributes to elments of the card
     card.setAttribute("class","card text-center");
     card.setAttribute("id","card");
     cardheader.setAttribute("class","card-header");
@@ -132,7 +121,8 @@ function quizPageGenerator (index){
     cardbody.setAttribute("class","card-body");    
     ulEl.setAttribute("class","list-group");
     ulEl.setAttribute("id","choice");    
-    cardfooter.setAttribute("class","card-footer text-muted");
+    cardfooter.setAttribute("class","card-footer text-muted text-left");
+    //Appending elements to question card 
     main.append(card);
     card.appendChild(cardheader);
     card.appendChild(cardbody);
@@ -144,52 +134,115 @@ function quizPageGenerator (index){
       liEl.setAttribute("id",j);
       liEl.setAttribute("data-toggle","list");
       liEl.textContent= (j + 1) + ". " + quiz[index].options[j];
-      ulEl.appendChild(liEl);
+      ulEl.appendChild(liEl);     
       console.log(j);
     }
-    
+
     cardtitle.style.display = "none";
     cardtext.style.display = "none";
     startbutton.style.display = "none";
     ulEl.style.display="block";
     card.style.display = "block";
 
-    var choiceval;
-    document.querySelectorAll('.list-group-item').forEach(item => {
-      item.addEventListener('click', event => {
-        choiceval = item.textContent;
-        console.log(choiceval);
-        for (var i=0; i < quiz.length; i++){
-          var answerArray = quiz[index].answer;      
-          console.log(answerArray);              
-          if (answerArray === choiceval.substring(3)){
-            i= quiz.length;    
-            index ++;        
-            score = score + 5;            
-            cardfooter.textContent="Correct!";
-            console.log(index);
-            quizPageGenerator(index);
-          }
-          else { 
-            i= quiz.length;
-            index ++;   
-            if (score !== 0){
-              score = score - 5;
-            }         
-            cardfooter.textContent="Wrong!";
-            console.log(index);
-            quizPageGenerator(index);
-          }
-
-        }
-        console.log(score);
-      } )
-    });
+    // Calling function when option is choice from List
+    liClicKevent ();
+    
+   
+  }else {
+    index--;
+    userCredentialsInput();
+    // alert("time to get user credential and show score");
+  }
        
 }
 
+function wait(ms){
+  var start = new Date().getTime();
+  var end = start;
+  while(end < start + ms) {
+    end = new Date().getTime();
+ }
+}
+
+function liClicKevent (){
+  var choiceval;
+  // Start process to verify user choice 
+  document.querySelectorAll('.list-group-item').forEach(item => {
+    item.addEventListener('click', event => {
+      choiceval = item.textContent;
+      console.log(choiceval);
+      // Loop to get correct answer from quiz array
+      for (var i=0; i < quiz.length; i++){
+        var answerArray = quiz[index].answer;      
+        console.log(answerArray);  // Console log for debugging     
+        // Comparing the correct answer from quiz array with user choice         
+        if (answerArray === choiceval.substring(3)){
+          i= quiz.length;    
+          index ++;        
+          score = score + 5;                            
+          cardfooter.textContent="Correct!";                            
+          console.log("Index: "+ index);   // Console log for debugging           
+        }
+        else { 
+          i= quiz.length;
+          index ++;   
+          if (score !== 0){
+            score = score - 5;
+          }         
+          cardfooter.textContent="Wrong!";
+          console.log(index);  // Console log for debugging           
+        }
+
+      }        
+      quizPageGenerator(index);
+      console.log(score);
+    } )
+  });
+}
 function getSeconds() { 
     return totalSeconds-Math.round();
+
+}
+
+function userCredentialsInput(){
+  $("#choice").empty();
+  
+  // Setting attributes and values to all elements used to Credential card
+
+   
+  card.setAttribute("class","card text-center");
+  cardheader.setAttribute("class","card-header");
+  cardheader.textContent="JavaScript Quiz";
+  cardbody.setAttribute("class","card-body");
+  cardtextinput.setAttribute("class","card-title");
+  cardtextinput.textContent="Your final score is:" + score;  
+  inputgroup.setAttribute("class","input-group mb-3");
+  inputgroupprepend.setAttribute("class","input-group-prepend");
+  inputspan.setAttribute("class","input-group-text");
+  inputspan.textContent="Enter your Initials : ";
+  input.setAttribute("type","text");
+  input.setAttribute("class","form-control");
+  inputgroupappend.setAttribute("class","input-group-append");
+  inputbutton.setAttribute("class","btn btn-outline-secondary");
+  inputbutton.setAttribute("type","button");
+  inputbutton.setAttribute("id","button-addon2");
+  inputbutton.textContent="Submit";
+
+
+//Appending elements to credential input card 
+
+  main.append(card);
+  card.appendChild(cardheader);
+  card.appendChild(cardbody);   
+  cardbody.appendChild(cardtextinput);
+  cardbody.appendChild(inputgroup);
+  inputgroup.appendChild(inputgroupprepend);
+  inputgroupprepend.appendChild(inputspan);
+  inputgroup.appendChild(input);
+  inputgroup.appendChild(inputgroupappend);
+  inputgroupappend.appendChild(inputbutton);
+  card.appendChild(cardfooter); 
+
 
 }
 
