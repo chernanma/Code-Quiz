@@ -25,6 +25,9 @@ var cardfooter = document.createElement("div");
 var startbutton = document.createElement("button");
 var ulEl = document.createElement("ul");
 
+var gobackbutton = document.createElement("button");
+var clearbutton = document.createElement("button");
+
 var index = 0;
 var score =0;
 
@@ -95,6 +98,8 @@ function startquiz(){
         if (totalSeconds < 0){
           alert("Time out!");
           clearInterval(interval);
+          userCredentialsInput();
+
         }
       },1000);
     console.log("Index: "+ index);
@@ -207,9 +212,10 @@ function getSeconds() {
 
 function userCredentialsInput(){
   $("#choice").empty();
-  
-  // Setting attributes and values to all elements used to Credential card
+  // Stop Timer
   clearInterval(interval);
+
+  // Setting attributes and values to all elements used to Credential card  
    
   card.setAttribute("class","card text-center");
   cardheader.setAttribute("class","card-header");
@@ -256,12 +262,64 @@ inputbutton.addEventListener("click", function(){
 
 }
 
+function HighscoresPages(){
+
+  $("#choice").empty();
+// Stop Timer
+clearInterval(interval);
+
+// Setting attributes and values to all elements used to Credential card  
+
+card.setAttribute("class","card text-center");
+cardheader.setAttribute("class","card-header");
+card.setAttribute("id","card");
+cardheader.textContent="Highscores";  
+cardbody.setAttribute("class","card-body");    
+ulEl.setAttribute("class","list-group");
+ulEl.setAttribute("id","choice");    
+cardfooter.setAttribute("class","card-footer text-muted text-left");
+gobackbutton.setAttribute("class","btn btn-primary mr-2");
+gobackbutton.textContent="Go Back";
+clearbutton.setAttribute("class","btn btn-primary");
+clearbutton.textContent="Clear Highscores";
+
+//Appending elements to credential input card 
+
+//Appending elements to question card 
+main.append(card);
+card.appendChild(cardheader);
+card.appendChild(cardbody);
+cardbody.appendChild(ulEl);
+card.appendChild(cardfooter);
+cardfooter.appendChild(gobackbutton);
+cardfooter.appendChild(clearbutton);
+
+
+
+// Adding action to click event on Go Back button
+gobackbutton.addEventListener("click", function(){ 
+  // Pointing back to the Main page
+  window.location.href = "./index.html";
+});
+
+// Adding action to click event on Clear Highscores button
+clearbutton.addEventListener("click", function(){ 
+  // Clearing Highscores 
+  $("#choice").empty();
+});
+}
+
+
 results=JSON.parse(localStorage.getItem("results"));
 console.log(results);
 var page = location.pathname.substring(location.pathname.lastIndexOf("/") + 1);
 console.log(page);
+
 if (page === "index.html"){
   landingpage();
+}
+else{
+  HighscoresPages();
 }
 
 
