@@ -346,6 +346,7 @@ if (localStorage.getItem("results") !== null){
 
 console.log(results); // for debbuging purposes
 var page = location.pathname.substring(location.pathname.lastIndexOf("/") + 1);
+console.log(page);
 
 // Identifying loading page  
 if (page === "index.html"){
