@@ -349,7 +349,7 @@ var page = location.pathname.substring(location.pathname.lastIndexOf("/") + 1);
 console.log(page);
 
 // Identifying loading page  
-if (page === "index.html" OR page === ""){
+if (page !== "scores.html"){
   landingpage();
 }
 else{
