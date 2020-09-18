@@ -73,7 +73,7 @@ function landingpage (){
     cardtitle.setAttribute("class","card-title");
     cardtitle.textContent="About this Quiz";
     cardtext.setAttribute("class","card-text");
-    cardtext.textContent="In this quiz you will find a list of common important questions on CSS. It will help you to improve your understanding of CSS which is used in cojuntion with HTML code to desing a great looking page. Test your knowlege in CSS and prepar your self.";
+    cardtext.textContent="In this quiz, you will find a list of the most common and important questions on CSS. It will help you to improve your understanding of CSS which is used in conjunction with HTML code to design a great looking page. Test your knowledge in CSS and prepare your self.";
     startbutton.setAttribute("class","btn btn-primary");
     startbutton.textContent="Start Quiz";
 
@@ -101,7 +101,7 @@ function startquiz(){
         totalSeconds--;
         
         if (totalSeconds < 0){
-          alert("Time out!");
+          alert("GAME OVER!");
           clearInterval(interval);
           userCredentialsInput();
 
@@ -305,6 +305,7 @@ cardbody.appendChild(ulEl);
 card.appendChild(cardfooter);
 cardfooter.appendChild(gobackbutton);
 cardfooter.appendChild(clearbutton);
+results.sort(function(a, b){return b.Score - a.Score});
 
 console.log(results);
 
