@@ -4,14 +4,14 @@ This project is about the creation of a quiz webpage from the scratch . With the
 
 [Click here to Access CSS Quiz](https://chernanma.github.io/Homework04/)
 
-![picture](./Assets/Images/main.jpg)
+![picture](./Assets/images/main.jpg)
 
 ---
 
 ## Criteria used to develop this project
 
 - GIVEN a User is taking a CSS quiz
-- WHEN User click on the ![picture](./Assets/Images/startbutton.jpg) button
+- WHEN User click on the ![picture](./Assets/images/startbutton.jpg) button
 - THEN the timer starts and the question is presented
 - WHEN User answer a question
 - THEN a "Correct" or "Wrong" message will appears momentarily on the bottom of the card where the next question is presented. 
@@ -22,7 +22,7 @@ This project is about the creation of a quiz webpage from the scratch . With the
 - WHEN the game is over
 - THEN a credential card is presented so the user can enter his/her initial to save his/her final score.
 
-NOTE: The score is calculated base on the number of questions and the correct/incorrect answer. After the user has answered all questions and the initials and the ![picture](./Assets/Images/submit.jpg) button has been clicked. The score and initials will be saved in the local storage and the user will be redirected to the Highscores webpage where all the previous scores have been storaged.
+NOTE: The score is calculated base on the number of questions and the correct/incorrect answer. After the user has answered all questions and the initials and the ![picture](./Assets/images/submit.jpg) button has been clicked. The score and initials will be saved in the local storage and the user will be redirected to the Highscores webpage where all the previous scores have been storaged.
 
 Once user has been redirected to the Highscores webpage, the user will have the obtion to GO BACK or CLEAR the score table.
 
@@ -31,13 +31,13 @@ Once user has been redirected to the Highscores webpage, the user will have the 
 
 ### Main Page
 
-![picture](./Assets/Images/main.jpg)
+![picture](./Assets/images/main.jpg)
 
 ### Question page
-![picture](./Assets/Images/questions.jpg)
+![picture](./Assets/images/questions.jpg)
 
 ### Highscore page
-![picture](./Assets/Images/highscores.jpg)
+![picture](./Assets/images/highscores.jpg)
 
 ### Alert when Game is over
-![picture](./Assets/Images/gameover.jpg)
+![picture](./Assets/images/gameover.jpg)
