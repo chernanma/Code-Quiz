@@ -29,7 +29,7 @@ Once user has been redirected to the Highscores webpage, the user will have the 
 ---
 ## Screenshots
 
-### Main page
+### Main Page
 
 ![picture](./Assets/Images/main.jpg)
 
