@@ -2,7 +2,7 @@
 
 This project is about the creation of a quiz webpage from the scratch . With the use of Javascript as the principal programming language and thanks to the potent front-end CSS framework as Bootstrap, I've been able to build this incredible CSS Quiz's webpage which is also responsive to all screen size including mobiles.
 
-[Click here to Access CSS Quiz](https://chernanma.github.io/Homework04/)
+[Click here to Access CSS Quiz](https://chernanma.github.io/Code-Quiz/)
 
 ![picture](./Assets/images/main.jpg)
 
